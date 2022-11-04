@@ -17,6 +17,7 @@ package com.example.bluetoothlechat.bluetooth
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -99,10 +100,26 @@ class LocationRequiredFragment : Fragment() {
             // Navigate to the chat fragment
             findNavController().navigate(R.id.action_start_chat)
         } else {
-            requestPermissions(
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_REQUEST_CODE
-            )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                requestPermissions(
+                    arrayOf(
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.BLUETOOTH_SCAN,
+                        Manifest.permission.BLUETOOTH_ADMIN,
+                        Manifest.permission.BLUETOOTH_CONNECT,
+                        Manifest.permission.BLUETOOTH_ADVERTISE,
+                        Manifest.permission.BLUETOOTH
+                    ),
+                    LOCATION_REQUEST_CODE
+                )
+            } else {
+                requestPermissions(
+                    arrayOf(
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ),
+                    LOCATION_REQUEST_CODE
+                )
+            }
         }
     }
 }

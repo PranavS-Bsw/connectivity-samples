@@ -15,6 +15,7 @@
  */
 package com.example.bluetoothlechat.bluetooth
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.bluetooth.*
 import android.bluetooth.le.AdvertiseCallback
@@ -30,7 +31,7 @@ import com.example.bluetoothlechat.bluetooth.Message.RemoteMessage
 import com.example.bluetoothlechat.chat.DeviceConnectionState
 
 private const val TAG = "ChatServer"
-
+@SuppressLint("MissingPermission")
 object ChatServer {
 
     // hold reference to app context to run the chat server
